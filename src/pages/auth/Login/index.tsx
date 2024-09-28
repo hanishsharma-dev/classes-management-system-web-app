@@ -13,7 +13,7 @@ import { AppConstants, RouteConstants } from "../../../constants";
 import CommonLoader from "../../../components/CommonLoader";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../../redux/slices/auth/loginSlice";
+import { loginUser, resetSuccess } from "../../../redux/slices/auth/loginSlice";
 
 // Define the interface for login input fields
 interface ILoginInputs {
@@ -31,8 +31,9 @@ const Login: React.FC = () => {
     useEffect(() => {
         if (data) {
             navigate(RouteConstants.HOME);
+            dispatch(resetSuccess());
         }
-    }, [data, navigate])
+    }, [data, navigate, dispatch])
 
     // Set up the form handling with react-hook-form, including validation and default values
     const { control, handleSubmit, formState: { errors } } = useForm<ILoginInputs>({

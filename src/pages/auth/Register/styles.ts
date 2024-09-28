@@ -11,7 +11,7 @@ const styles = {
         padding: { xs: 2, sm: 4, md: 6 }, // Padding for different screen sizes
     },
     centerBoxContainer: {
-        width: { xs: '80vw', sm: '60vw', md: '40vw' }, // Responsive width
+        width: { xs: '90vw', sm: '70vw', md: '50vw' },
         borderWidth: '1px',
         borderColor: 'black',
         backgroundColor: 'white',
@@ -20,29 +20,30 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
-        paddingBottom: { xs: 6, sm: 8, md: 10 }, // Padding for different screen sizes
+        padding: { xs: 2, sm: 4, md: 6 }, // Use consistent padding
+        boxSizing: 'border-box',  // Ensure padding does not cause overflow
+        overflow: 'hidden',
+        height: 'auto', // Allow the height to adjust based on content
+        maxHeight: '100%', // Prevent the box from exceeding the height of the screen
     },
     loginLabel: {
         marginTop: { xs: '32px', sm: '24px', md: '16px' },
-        color: 'black'
+        color: 'black',
     },
     textField: {
-        width: { xs: '70vw', sm: '50vw', md: '30vw' }, // Responsive width
+        width: { xs: '80vw', sm: '60vw', md: '40vw' },
         marginTop: { xs: '32px', sm: '24px', md: '16px' },
-        borderColor: 'white'
+        borderColor: 'white',
     },
-    forgotPasswordContainer: {
-        width: { xs: '70vw', sm: '50vw', md: '30vw' }, // Responsive width
+    termsAndConditionContainer: {
+        width: { xs: '80vw', sm: '60vw', md: '40vw' },
         marginTop: { xs: '32px', sm: '24px', md: '16px' },
         display: 'flex',
-        justifyContent: 'flex-end',
-    },
-    loginButton: {
-        width: { xs: '70vw', sm: '50vw', md: '30vw' }, // Responsive width
-        marginTop: { xs: '32px', sm: '24px', md: '16px' }
-    },
-    bottomLineContainer: {
-        display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: { xs: '48px', sm: '40px', md: '32px' },
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: '2px', // Reduce the gap between checkbox and text
+        flexWrap: 'nowrap',
+        overflow: 'hidden',
     },
     dontHaveAnAccount: {
         color: 'black',
@@ -56,6 +57,18 @@ const styles = {
         whiteSpace: 'nowrap', // Prevent the link from breaking into multiple lines
         flexShrink: 1, // Allow link to shrink if necessary
         fontSize: '12px'
+
+    },
+    loginButton: {
+        width: { xs: '80vw', sm: '60vw', md: '40vw' },
+        marginTop: { xs: '32px', sm: '24px', md: '16px' },
+    },
+    bottomLineContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: { xs: '48px', sm: '40px', md: '32px' },
     },
 };
 

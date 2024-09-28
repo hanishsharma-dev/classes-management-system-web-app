@@ -1,5 +1,7 @@
 import Login from './auth/Login';
+import Register from './auth/Register';
 
 export {
-    Login
+    Login,
+    Register
 }

@@ -5,40 +5,38 @@ import { toast } from 'react-toastify';
 import { postRequest } from '../../../config/apiService';
 import APIUrls from '../../../config/APIsCollections';
 import { AxiosError } from 'axios';
+import { AppConstants } from '../../../constants';
 
-interface LoginPayload {
+interface RegisterPayload {
     email: string;
     password: string;
+    fullName: string;
 }
 
-interface LoginState {
+interface RegisterState {
     data: unknown;
     loading: boolean;
     error: string | null;
 }
 
-const initialState: LoginState = {
+const initialState: RegisterState = {
     data: null,
     loading: false,
     error: null,
 };
 
 // Async thunk for fetching data
-export const loginUser = createAsyncThunk('loginData/loginUser', async (payload: LoginPayload, { rejectWithValue }) => {
+export const registerUser = createAsyncThunk('registerData/registerUser', async (payload: RegisterPayload, { rejectWithValue }) => {
     try {
-        const response = await postRequest(APIUrls.LOGIN, payload, null);
-        const token = response.token;
-        localStorage.setItem('token', token);
+        const response = await postRequest(APIUrls.REGISTER, payload, null);
+        console.log('response: ', response)
         return response;
-    } catch (error: unknown) { // Catch the error as unknown
-        // Narrow down the error type to AxiosError
+    } catch (error: unknown) {
         if (error instanceof AxiosError) {
             toast(error.response?.data || error.message);
-            console.error('Request failed:', error.response?.data || error.message);
-            return rejectWithValue(error.response?.data || 'Login failed: Invalid credentials or server error');
+            return rejectWithValue(error.response?.data || 'Register failed');
         } else {
             toast(error?.message);
-            console.error('An unexpected error occurred:', error);
             return rejectWithValue('An unexpected error occurred');
         }
     }
@@ -46,7 +44,7 @@ export const loginUser = createAsyncThunk('loginData/loginUser', async (payload:
 
 
 const authSlice = createSlice({
-    name: 'loginData',
+    name: 'registerData',
     initialState,
     reducers: {
         resetSuccess: (state) => {
@@ -55,15 +53,16 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(loginUser.pending, (state) => {
+            .addCase(registerUser.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(loginUser.fulfilled, (state, action) => {
+            .addCase(registerUser.fulfilled, (state, action) => {
+                console.log('Thunk fulfilled with payload:', action.payload);  // Log payload
                 state.loading = false;
                 state.data = action.payload;
             })
-            .addCase(loginUser.rejected, (state, action) => {
+            .addCase(registerUser.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || 'Failed to fetch data';
             });

@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import necessary modules from react-router-dom
-import {Login } from './pages'; // Import page components
+import { Login, Register } from './pages'; // Import page components
 import { RouteConstants } from './constants'; // Import route constants
 //import ProtectedRoutes from './navigation/ProtectedRoutes';
 
@@ -13,6 +13,7 @@ const App: React.FC = () => {
         {/* Route for the login path displays the Login component */}
         <Route path={RouteConstants.LOGIN} element={<Login />} />
         {/* Route for the register path displays the Register component */}
+        <Route path={RouteConstants.REGISTER} element={<Register />} />
       </Routes>
     </Router>
   )
